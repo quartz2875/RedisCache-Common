@@ -10,13 +10,17 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyCompanyAttribute("RedisCache.Common")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("BurakQuartz")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
+[assembly: System.Reflection.AssemblyDescriptionAttribute("\r\n      This Project is the RedisCache Common Project. It contains the Repository" +
+    " mehtohs required for Redis Cache. Supports HashEntiry Get Set for performance i" +
+    "n Redis Cache.\r\n    ")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
 [assembly: System.Reflection.AssemblyProductAttribute("RedisCache.Common")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RedisCache.Common")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
+[assembly: System.Reflection.AssemblyMetadataAttribute("RepositoryUrl", "https://github.com/quartz2875/RedisCache-Common")]
 
 // MSBuild WriteCodeFragment sınıfı tarafından oluşturuldu.
 

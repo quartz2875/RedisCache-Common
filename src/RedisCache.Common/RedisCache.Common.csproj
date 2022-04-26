@@ -4,6 +4,17 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+
+    <PackageId>RedisCache.Common</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>Burak Quartz</Authors>
+    <Company>BurakQuartz</Company>
+
+    <PackageTags>.Net6.0, RedisCache Common, Dependency Injection</PackageTags>
+    <Description>
+      This Project is the RedisCache Common Project. It contains the Repository mehtohs required for Redis Cache. Supports HashEntiry Get Set for performance in Redis Cache.
+    </Description> 
+    <RepositoryUrl>https://github.com/quartz2875/RedisCache-Common</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
