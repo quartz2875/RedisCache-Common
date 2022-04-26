@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "9nC++AspLMJKvjiTJURwXz8qkZpIyZglw/Hf9bKVsP0oy+EaFc4lr2iuwumJCa6lgu3VLDKNlEpbRpN8oID/dA==",
+  "dgSpecHash": "BFzeSaEbC0l1uNgarFy/xJOC60MBY7wGSdliNOHuMWuu0NOGg143JDeGGx7VMeAKDn9QJFZp1wAq7/+1glu7jg==",
   "success": true,
   "projectFilePath": "/Users/quartz/Projects/github-project/RedisCache-Common/src/RedisCache.Common/RedisCache.Common.csproj",
   "expectedPackageFiles": [

@@ -934,6 +934,7 @@
         "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
       ],
       "configFilePaths": [
+        "/Users/quartz/Projects/github-project/RedisCache-Common/NuGet.Config",
         "/Users/quartz/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [

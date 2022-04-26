@@ -18,7 +18,6 @@ namespace RedisCache.Common
             services.AddSingleton<IConnectionMultiplexer>(opt =>
             ConnectionMultiplexer.Connect(configuration.GetConnectionString("RedisConnection")));
             services.AddScoped(typeof(IGenericRedisRepository<>), typeof(GenericRedisRepository<>));
-            // services.AddSingleton<IRabbitMQService, RabbitMQService>();
         }
     }
 }
