@@ -4,6 +4,9 @@
 */
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
+using RedisCache.Common.Configurations.Settings;
+using RedisCache.Common.Configurations.Settings.Interfaces;
 using RedisCache.Common.Repositories.Implementations;
 using RedisCache.Common.Repositories.Implementations.Interfaces;
 using StackExchange.Redis;
@@ -15,8 +18,9 @@ namespace RedisCache.Common
     {
         public static IServiceCollection AddRedisService(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddSingleton<IConnectionMultiplexer>(opt =>
-            ConnectionMultiplexer.Connect(configuration.GetConnectionString("RedisConnection")));
+
+            services.AddSingleton<IRedisSettings>(serviceProvider => serviceProvider.GetRequiredService<IOptions<RedisSettings>>().Value);
+
             services.AddScoped(typeof(IGenericRedisRepository<,>), typeof(GenericRedisRepository<,>));
             return services;
         }
