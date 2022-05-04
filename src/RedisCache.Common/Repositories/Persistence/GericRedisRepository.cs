@@ -2,50 +2,49 @@
 ** BurakQuartz v1.0.0 ()
 ** Copyright © 2022 BurakQuartz. All rights reserved.
 */
+using System.Globalization;
+using BaseEntities.Common.Implementatioins;
+using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using RedisCache.Common.Repositories.Application;
 using StackExchange.Redis;
 
 namespace RedisCache.Common.Repositories.Persistence
 {
 
-    public class GenericRedisRepository<T> : IGenericRedisRepository<T> where T : class
+    public class GenericRedisRepository<T, TId> : IGenericRedisRepository<T, TId> where T : BaseEntity<TId>
     {
-        private IConnectionMultiplexer _redis;
 
-        public GenericRedisRepository(IConnectionMultiplexer redis)
+        public const string GenericExceptionLogMessage = "An exception occured at {0} UTC. Exception details follow:.\n\nType: {1}\nMessage: {2}\nStack trace: {3}"; private readonly IConnectionMultiplexer _redis;
+        /// <summary>
+        ///      Gets or sets an  <see cref="ILogger{BaseRepository}"/> representing application logger.
+        /// </summary>
+        protected readonly ILogger<GenericRedisRepository<T, TId>> _logger;
+
+        /// <summary>
+        /// Constructs a new instance of <see cref="RedisCacheService" />.
+        /// </summary>
+        /// <param name="multiplexer">
+        ///     An <see cref="IRedisConnectionMultiplexer"/> representing the redis connection multiplexer.
+        /// </param>
+
+        public GenericRedisRepository(IConnectionMultiplexer redis, ILogger<GenericRedisRepository<T, TId>> logger)
         {
             _redis = redis;
+            _logger = logger;
+
         }
         /// <inheritdoc />
-        public bool DeleteStringByKey(string key, CommandFlags flags = CommandFlags.None)
+        public bool DeleteStringByKey(string key, CommandFlags flags = CommandFlags.None, int dbIndex = -1)
         {
-            var _db = _redis.GetDatabase();
+            var _db = _redis.GetDatabase(dbIndex);
             return _db.KeyDelete(key, flags);
         }
+
         /// <inheritdoc />
-        public T GetGenericTypeByKey(string key, CommandFlags flags = CommandFlags.None)
+        public string GetStringByKey(string key, CommandFlags flags = CommandFlags.None, int dbIndex = -1)
         {
-            throw new NotImplementedException();
-        }
-        /// <inheritdoc />
-        public Task<T> GetGenericTypeByKeyAsync(string key, CommandFlags flags = CommandFlags.None)
-        {
-            throw new NotImplementedException();
-        }
-        /// <inheritdoc />
-        public IEnumerable<T> GetGenericTypeListByKey(string key, CommandFlags flags = CommandFlags.None)
-        {
-            throw new NotImplementedException();
-        }
-        /// <inheritdoc />
-        public Task<IEnumerable<T>> GetGenericTypeListByKeyAsync(string key, CommandFlags flags = CommandFlags.None)
-        {
-            throw new NotImplementedException();
-        }
-        /// <inheritdoc />
-        public string GetStringByKey(string key, CommandFlags flags = CommandFlags.None)
-        {
-            var _db = _redis.GetDatabase();
+            var _db = _redis.GetDatabase(dbIndex);
 
             var result = _db.StringGet(key, flags);
             if (!string.IsNullOrEmpty(result))
@@ -54,9 +53,9 @@ namespace RedisCache.Common.Repositories.Persistence
             return string.Empty;
         }
         /// <inheritdoc />
-        public async Task<string> GetStringByKeyAsync(string key, CommandFlags flags = CommandFlags.None)
+        public async Task<string> GetStringByKeyAsync(string key, CommandFlags flags = CommandFlags.None, int dbIndex = -1)
         {
-            var _db = _redis.GetDatabase();
+            var _db = _redis.GetDatabase(dbIndex);
 
             var result = await _db.StringGetAsync(key, flags);
             if (!string.IsNullOrEmpty(result))
@@ -64,46 +63,46 @@ namespace RedisCache.Common.Repositories.Persistence
             return string.Empty;
         }
         /// <inheritdoc />
-        public bool SetGenericType(string key, T value, TimeSpan expiry, When when = When.Always, CommandFlags flags = CommandFlags.None)
+        public bool SetGenericType(string key, T value, TimeSpan expiry, When when = When.Always, CommandFlags flags = CommandFlags.None, int dbIndex = -1)
         {
             throw new NotImplementedException();
 
         }
         /// <inheritdoc />
-        public Task<bool> SetGenericTypeAsync(string key, T value, TimeSpan expiry, When when = When.Always, CommandFlags flags = CommandFlags.None)
+        public Task<bool> SetGenericTypeAsync(string key, T value, TimeSpan expiry, When when = When.Always, CommandFlags flags = CommandFlags.None, int dbIndex = -1)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public bool SetString(string key, string value, TimeSpan expiry, When when = When.Always, CommandFlags flags = CommandFlags.None)
+        public bool SetString(string key, string value, TimeSpan expiry, When when = When.Always, CommandFlags flags = CommandFlags.None, int dbIndex = -1)
         {
 
-            var _db = _redis.GetDatabase();
+            var _db = _redis.GetDatabase(dbIndex);
             return _db.StringSet(key, value, expiry, when, flags);
         }
         /// <inheritdoc />
-        public async Task<bool> SetStringAsync(string key, string value, TimeSpan expiry, When when = When.Always, CommandFlags flags = CommandFlags.None)
+        public async Task<bool> SetStringAsync(string key, string value, TimeSpan expiry, When when = When.Always, CommandFlags flags = CommandFlags.None, int dbIndex = -1)
         {
-            var _db = _redis.GetDatabase();
+            var _db = _redis.GetDatabase(dbIndex);
             return await _db.StringSetAsync(key, value);
         }
         /// <inheritdoc />
-        public void SetHash(string key, HashEntry[] value, CommandFlags flags = CommandFlags.None)
+        public void SetHash(string key, HashEntry[] value, CommandFlags flags = CommandFlags.None, int dbIndex = -1)
         {
-            var _db = _redis.GetDatabase();
+            var _db = _redis.GetDatabase(dbIndex);
             _db.HashSet(key, value, flags: flags);
         }
         /// <inheritdoc />
-        public async Task SetHashAsync(string key, HashEntry[] value, CommandFlags flags = CommandFlags.None)
+        public async Task SetHashAsync(string key, HashEntry[] value, CommandFlags flags = CommandFlags.None, int dbIndex = -1)
         {
-            var _db = _redis.GetDatabase();
+            var _db = _redis.GetDatabase(dbIndex);
             await _db.HashSetAsync(key, value, flags);
         }
         /// <inheritdoc />
-        public HashEntry[] HashGetAllKey(RedisKey key, CommandFlags flags = CommandFlags.None)
+        public HashEntry[] HashGetAllKey(RedisKey key, CommandFlags flags = CommandFlags.None, int dbIndex = -1)
         {
-            var _db = _redis.GetDatabase();
+            var _db = _redis.GetDatabase(dbIndex);
             var result = _db.HashGetAll(key, flags);
             if (result != null)
                 return result;
@@ -111,31 +110,122 @@ namespace RedisCache.Common.Repositories.Persistence
 
         }
         /// <inheritdoc />
-        public async Task<HashEntry[]> HashGetAllKeyAsync(RedisKey key, CommandFlags flags = CommandFlags.None)
+        public async Task<HashEntry[]> HashGetAllKeyAsync(RedisKey key, CommandFlags flags = CommandFlags.None, int dbIndex = -1)
         {
-            var _db = _redis.GetDatabase();
+            var _db = _redis.GetDatabase(dbIndex);
             var result = await _db.HashGetAllAsync(key, flags);
             if (result != null)
                 return result;
             return default!;
         }
         /// <inheritdoc />
-        public long HashDelByKeys(RedisKey key, RedisValue[] hashKeys, CommandFlags flags = CommandFlags.None)
+        public long HashDelByKeys(RedisKey key, RedisValue[] hashKeys, CommandFlags flags = CommandFlags.None, int dbIndex = -1)
         {
-            var _db = _redis.GetDatabase();
+            var _db = _redis.GetDatabase(dbIndex);
             return _db.HashDelete(key, hashKeys, flags);
 
         }
         /// <inheritdoc />
-        public async Task<long> HashDelByKeysAsync(RedisKey key, RedisValue[] hashKeys, CommandFlags flags = CommandFlags.None)
+        public async Task<long> HashDelByKeysAsync(RedisKey key, RedisValue[] hashKeys, CommandFlags flags = CommandFlags.None, int dbIndex = -1)
         {
-            var _db = _redis.GetDatabase();
+            var _db = _redis.GetDatabase(dbIndex);
             return await _db.HashDeleteAsync(key, hashKeys, flags);
         }
 
         public string FormatKey(string key)
         {
             throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public async Task<T> GetAsync<T>(string key, CommandFlags flags = CommandFlags.None, int dbIndex = -1)
+        {
+            var _db = _redis.GetDatabase(dbIndex);
+            var result = await _db.StringGetAsync(key, flags: flags).ConfigureAwait(false);
+
+            return !result.IsNull && result.HasValue ? JsonConvert.DeserializeObject<T>(result) : default(T);
+
+        }
+        /// <inheritdoc />
+        public bool TryGetValue<T>(string key, out T item, CommandFlags flags = CommandFlags.None, int dbIndex = -1)
+        {
+            var _db = _redis.GetDatabase(dbIndex);
+            RedisValue cachedItem = _db.StringGetAsync(key, flags).Result;
+            if (!cachedItem.IsNull && cachedItem.HasValue)
+            {
+                item = JsonConvert.DeserializeObject<T>(cachedItem);
+                return true;
+            }
+
+            item = default(T);
+            return false;
+        }
+        /// <inheritdoc />
+        public bool TryGetValue(string key, out string value, CommandFlags flags = CommandFlags.None, int dbIndex = -1)
+        {
+            var _db = _redis.GetDatabase(dbIndex);
+            RedisValue cachedItem = _db.StringGetAsync(key, flags).Result;
+            if (!cachedItem.IsNull)
+            {
+                value = cachedItem;
+                return true;
+            }
+
+            value = null;
+            return false;
+        }
+        /// <inheritdoc />
+        public bool Set<T>(string key, T value, TimeSpan expiry, When when = When.Always, CommandFlags flags = CommandFlags.None, int dbIndex = -1)
+        {
+            try
+            {
+                var _db = _redis.GetDatabase(dbIndex);
+                _db.StringSet(key, JsonConvert.SerializeObject(value), expiry, when, flags);
+            }
+            catch (Exception exception)
+            {
+                _logger.LogCritical(
+                    GenericExceptionLogMessage,
+                    DateTime.UtcNow.ToString(CultureInfo.InvariantCulture),
+                    exception.GetType().Name,
+                    exception.Message,
+                    exception.StackTrace);
+            }
+
+            throw new NotImplementedException();
+        }
+        /// <inheritdoc />
+        public async Task<bool> SetAsync<T>(string key, T value, TimeSpan expiry, When when = When.Always, CommandFlags flags = CommandFlags.None, int dbIndex = -1)
+        {
+            var _db = _redis.GetDatabase(dbIndex);
+            return await _db.StringSetAsync(key, JsonConvert.SerializeObject(value), expiry, when, flags).ConfigureAwait(false);
+        }
+        /// <inheritdoc />
+        public void SetAll<T>(Dictionary<string, T> data, TimeSpan expiry, When when = When.Always, CommandFlags flags = CommandFlags.None, int dbIndex = -1)
+        {
+            var _db = _redis.GetDatabase(dbIndex);
+
+            try
+            {
+                var cacheItems = new List<Task<bool>>();
+
+                foreach (var item in data)
+                {
+                    string serializedObject = JsonConvert.SerializeObject(item.Value, Formatting.Indented);
+                    cacheItems.Add(_db.StringSetAsync(item.Key, serializedObject, expiry, when, flags));
+                }
+
+                Task.WhenAll(cacheItems.ToArray()).ConfigureAwait(false);
+            }
+            catch (Exception exception)
+            {
+                _logger.LogCritical(
+                    GenericExceptionLogMessage,
+                    DateTime.UtcNow.ToString(CultureInfo.InvariantCulture),
+                    exception.GetType().Name,
+                    exception.Message,
+                    exception.StackTrace);
+            }
         }
 
     }

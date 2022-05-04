@@ -13,11 +13,12 @@ namespace RedisCache.Common
 
     public static class RedisServiceExtensions
     {
-        public static void AddRedisService(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddRedisService(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddSingleton<IConnectionMultiplexer>(opt =>
             ConnectionMultiplexer.Connect(configuration.GetConnectionString("RedisConnection")));
-            services.AddScoped(typeof(IGenericRedisRepository<>), typeof(GenericRedisRepository<>));
+            services.AddScoped(typeof(IGenericRedisRepository<,>), typeof(GenericRedisRepository<,>));
+            return services;
         }
     }
 }
