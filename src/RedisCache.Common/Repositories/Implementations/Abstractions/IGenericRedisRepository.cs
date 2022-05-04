@@ -361,6 +361,6 @@ namespace RedisCache.Common.Repositories.Implementations.Abstractions
 
         Task<long> HashDelByKeysAsync(RedisKey key, RedisValue[] hashKeys, CommandFlags flags = CommandFlags.None, int dbIndex = -1);
 
-        string FormatKey(string key);
+
     }
 }

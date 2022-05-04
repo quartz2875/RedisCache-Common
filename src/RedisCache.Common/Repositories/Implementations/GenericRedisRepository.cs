@@ -125,11 +125,6 @@ namespace RedisCache.Common.Repositories.Implementations
             return await _db.HashDeleteAsync(key, hashKeys, flags);
         }
 
-        public string FormatKey(string key)
-        {
-            throw new NotImplementedException();
-        }
-
         /// <inheritdoc />
         public async Task<T> GetAsync<T>(string key, CommandFlags flags = CommandFlags.None, int dbIndex = -1)
         {
@@ -173,7 +168,7 @@ namespace RedisCache.Common.Repositories.Implementations
             try
             {
                 var _db = _redis.GetDatabase(dbIndex);
-                _db.StringSet(key, JsonConvert.SerializeObject(value), expiry, when, flags);
+                return _db.StringSet(key, JsonConvert.SerializeObject(value), expiry, when, flags);
             }
             catch (Exception exception)
             {
@@ -183,9 +178,8 @@ namespace RedisCache.Common.Repositories.Implementations
                     exception.GetType().Name,
                     exception.Message,
                     exception.StackTrace);
+                return false;
             }
-
-            throw new NotImplementedException();
         }
         /// <inheritdoc />
         public async Task<bool> SetAsync<T>(string key, T value, TimeSpan expiry, When when = When.Always, CommandFlags flags = CommandFlags.None, int dbIndex = -1)
