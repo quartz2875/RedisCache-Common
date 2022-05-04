@@ -1,16 +1,15 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
+    <TargetFrameworks>net5.0;net6.0</TargetFrameworks>
     <Nullable>enable</Nullable>
 
     <PackageId>RedisCache.Common</PackageId>
-    <Version>1.0.0</Version>
+    <Version>1.0.3</Version>
     <Authors>Burak Quartz</Authors>
     <Company>BurakQuartz</Company>
 
-    <PackageTags>.Net6.0, RedisCache Common, Dependency Injection</PackageTags>
+    <PackageTags>.Net5.0, .Net6.0, RedisCache Common, Dependency Injection</PackageTags>
     <Description>
       This Project is the RedisCache Common Project. It contains the Repository mehtohs required for Redis Cache. Supports HashEntiry Get Set for performance in Redis Cache.
     </Description> 
@@ -18,7 +17,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BaseEntities.Common" Version="1.0.6" />
+    <PackageReference Include="EFCore.BaseEntity.Common" Version="1.0.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />

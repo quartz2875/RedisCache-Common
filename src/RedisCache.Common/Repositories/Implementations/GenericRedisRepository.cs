@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Threading.Tasks;
-using BaseEntities.Common.Implementatioins;
+using EFCore.BaseEntity.Common;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using RedisCache.Common.Repositories.Implementations.Abstractions;
@@ -18,7 +18,8 @@ namespace RedisCache.Common.Repositories.Implementations
     public class GenericRedisRepository<T, TId> : IGenericRedisRepository<T, TId> where T : BaseEntity<TId>
     {
 
-        public const string GenericExceptionLogMessage = "An exception occured at {0} UTC. Exception details follow:.\n\nType: {1}\nMessage: {2}\nStack trace: {3}"; private readonly IConnectionMultiplexer _redis;
+        public const string GenericExceptionLogMessage = "An exception occured at {0} UTC. Exception details follow:.\n\nType: {1}\nMessage: {2}\nStack trace: {3}";
+        private readonly IConnectionMultiplexer _redis;
         /// <summary>
         ///      Gets or sets an  <see cref="ILogger{BaseRepository}"/> representing application logger.
         /// </summary>

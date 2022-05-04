@@ -5,7 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using BaseEntities.Common.Implementatioins;
+using EFCore.BaseEntity.Common;
 using StackExchange.Redis;
 
 namespace RedisCache.Common.Repositories.Implementations.Abstractions
