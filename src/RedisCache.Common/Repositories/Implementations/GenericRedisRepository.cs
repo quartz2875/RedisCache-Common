@@ -2,14 +2,17 @@
 ** BurakQuartz v1.0.0 ()
 ** Copyright © 2022 BurakQuartz. All rights reserved.
 */
+using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Threading.Tasks;
 using BaseEntities.Common.Implementatioins;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using RedisCache.Common.Repositories.Application;
+using RedisCache.Common.Repositories.Implementations.Interfaces;
 using StackExchange.Redis;
 
-namespace RedisCache.Common.Repositories.Persistence
+namespace RedisCache.Common.Repositories.Implementations
 {
 
     public class GenericRedisRepository<T, TId> : IGenericRedisRepository<T, TId> where T : BaseEntity<TId>
@@ -62,17 +65,7 @@ namespace RedisCache.Common.Repositories.Persistence
                 return result;
             return string.Empty;
         }
-        /// <inheritdoc />
-        public bool SetGenericType(string key, T value, TimeSpan expiry, When when = When.Always, CommandFlags flags = CommandFlags.None, int dbIndex = -1)
-        {
-            throw new NotImplementedException();
 
-        }
-        /// <inheritdoc />
-        public Task<bool> SetGenericTypeAsync(string key, T value, TimeSpan expiry, When when = When.Always, CommandFlags flags = CommandFlags.None, int dbIndex = -1)
-        {
-            throw new NotImplementedException();
-        }
 
         /// <inheritdoc />
         public bool SetString(string key, string value, TimeSpan expiry, When when = When.Always, CommandFlags flags = CommandFlags.None, int dbIndex = -1)

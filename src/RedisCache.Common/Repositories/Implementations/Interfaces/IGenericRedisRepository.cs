@@ -2,10 +2,13 @@
 ** BurakQuartz v1.0.0 ()
 ** Copyright © 2022 BurakQuartz. All rights reserved.
 */
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using BaseEntities.Common.Implementatioins;
 using StackExchange.Redis;
 
-namespace RedisCache.Common.Repositories.Application
+namespace RedisCache.Common.Repositories.Implementations.Interfaces
 {
     public interface IGenericRedisRepository<T, TId> where T : BaseEntity<TId>
     {

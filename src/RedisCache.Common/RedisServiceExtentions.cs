@@ -4,8 +4,8 @@
 */
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using RedisCache.Common.Repositories.Application;
-using RedisCache.Common.Repositories.Persistence;
+using RedisCache.Common.Repositories.Implementations;
+using RedisCache.Common.Repositories.Implementations.Interfaces;
 using StackExchange.Redis;
 
 namespace RedisCache.Common
