@@ -9,7 +9,6 @@ using RedisCache.Common.Configurations.Settings;
 using RedisCache.Common.Configurations.Settings.Abstractions;
 using RedisCache.Common.Repositories.Implementations;
 using RedisCache.Common.Repositories.Implementations.Abstractions;
-using StackExchange.Redis;
 
 namespace RedisCache.Common
 {
