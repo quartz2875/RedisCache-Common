@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using BaseEntities.Common.Implementatioins;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using RedisCache.Common.Repositories.Implementations.Interfaces;
+using RedisCache.Common.Repositories.Implementations.Abstractions;
 using StackExchange.Redis;
 
 namespace RedisCache.Common.Repositories.Implementations

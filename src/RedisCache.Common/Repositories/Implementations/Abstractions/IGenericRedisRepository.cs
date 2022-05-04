@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using BaseEntities.Common.Implementatioins;
 using StackExchange.Redis;
 
-namespace RedisCache.Common.Repositories.Implementations.Interfaces
+namespace RedisCache.Common.Repositories.Implementations.Abstractions
 {
     public interface IGenericRedisRepository<T, TId> where T : BaseEntity<TId>
     {

@@ -1,4 +1,4 @@
-using RedisCache.Common.Configurations.Settings.Interfaces;
+using RedisCache.Common.Configurations.Settings.Abstractions;
 
 namespace RedisCache.Common.Configurations.Settings
 {

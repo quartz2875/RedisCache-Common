@@ -6,9 +6,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using RedisCache.Common.Configurations.Settings;
-using RedisCache.Common.Configurations.Settings.Interfaces;
+using RedisCache.Common.Configurations.Settings.Abstractions;
 using RedisCache.Common.Repositories.Implementations;
-using RedisCache.Common.Repositories.Implementations.Interfaces;
+using RedisCache.Common.Repositories.Implementations.Abstractions;
 using StackExchange.Redis;
 
 namespace RedisCache.Common

@@ -3,7 +3,7 @@
 ** BurakQuartz v1.0.0 ()
 ** Copyright © 2022 BurakQuartz. All rights reserved.
 */
-namespace RedisCache.Common.Configurations.Settings.Interfaces
+namespace RedisCache.Common.Configurations.Settings.Abstractions
 {
     /// <summary>
     ///     Represents the relevant settings required to set redis connections.
