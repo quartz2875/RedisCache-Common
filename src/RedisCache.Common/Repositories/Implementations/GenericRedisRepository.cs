@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Threading.Tasks;
 using EFCore.BaseEntity.Common;
 using Microsoft.Extensions.Logging;
@@ -215,6 +216,27 @@ namespace RedisCache.Common.Repositories.Implementations
                     exception.StackTrace);
             }
         }
+        /// <inheritdoc />
+        public async Task SetManyHashEntriesAsync(Dictionary<RedisKey, IEnumerable<HashEntry>> entries, CommandFlags commandFlag = CommandFlags.None, int dbIndex = -1)
+        {
+            var _db = _redis.GetDatabase(dbIndex);
+            try
+            {
+                List<Task> cachedItems = new();
+                cachedItems.AddRange(from entry in entries select _db.HashSetAsync(entry.Key, entry.Value.ToArray(), commandFlag));
+                if (cachedItems.Any()) await Task.WhenAll(cachedItems).ConfigureAwait(false);
+            }
+            catch (Exception exception)
+            {
+                _logger.LogCritical(
+                    GenericExceptionLogMessage,
+                    DateTime.UtcNow.ToString(CultureInfo.InvariantCulture),
+                    exception.GetType().Name,
+                    exception.Message,
+                    exception.StackTrace);
+            }
+        }
+
 
     }
 

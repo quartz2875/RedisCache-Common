@@ -286,6 +286,22 @@ namespace RedisCache.Common.Repositories.Implementations.Abstractions
         /// </returns>
         Task SetHashAsync(string key, HashEntry[] value, CommandFlags flags = CommandFlags.None, int dbIndex = -1);
 
+
+        /// <summary>
+        /// Sets or update many collection of hash entries.
+        /// </summary>
+        /// <param name="entries">
+        /// A <see cref="Dictionary{RedisKey, IEnumerable{HashEntry}}"/> represents the collection of hash entries.
+        /// </param>
+        /// <param name="commandFlag">
+        /// A <see cref="CommandFlags"/> represents cache command flags, by deufalt None.
+        /// </param>
+        /// <param name="dbIndex">
+        /// A <see cref="int"/> represents which db Index to use in the Redis Cache (Default value is -1).
+        /// </param>
+        Task SetManyHashEntriesAsync(Dictionary<RedisKey, IEnumerable<HashEntry>> entries, CommandFlags commandFlag = CommandFlags.None, int dbIndex = -1);
+
+
         /// <summary>
         ///     It is used to return a Value in Redis Cache.
         /// </summary>
