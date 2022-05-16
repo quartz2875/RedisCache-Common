@@ -236,8 +236,24 @@ namespace RedisCache.Common.Repositories.Implementations
                     exception.StackTrace);
             }
         }
-
-
+        /// <inheritdoc />
+        public RedisValue[] GetHashValue(RedisKey key, RedisValue[] hashField, CommandFlags commandFlag = CommandFlags.None, int dbIndex = -1)
+        {
+            var _db = _redis.GetDatabase(dbIndex);
+            var result = _db.HashGet(key, hashField, commandFlag);
+            if (result != null)
+                return result;
+            return default!;
+        }
+        /// <inheritdoc />
+        public async Task<RedisValue[]> GetHashValueAsync(RedisKey key, RedisValue[] hashField, CommandFlags commandFlag = CommandFlags.None, int dbIndex = -1)
+        {
+            var _db = _redis.GetDatabase(dbIndex);
+            var result = await _db.HashGetAsync(key, hashField, commandFlag);
+            if (result != null)
+                return result;
+            return default!;
+        }
     }
 
 }
