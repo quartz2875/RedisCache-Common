@@ -396,7 +396,7 @@ namespace RedisCache.Common.Repositories.Implementations.Abstractions
         /// A <see cref="RedisValue[]"/> returns a value representing whether the set operation was successful.
         /// </returns>
 
-        RedisValue[] GetHashValueList(RedisKey key, RedisValue[] hashField, CommandFlags commandFlag = CommandFlags.None, int dbIndex = -1);
+        RedisValue[] GetHashValues(RedisKey key, RedisValue[] hashField, CommandFlags commandFlag = CommandFlags.None, int dbIndex = -1);
         /// <summary>
         ///     Used to asynchronously remove one or more values in Redis Cache.
         /// </summary>
@@ -415,7 +415,7 @@ namespace RedisCache.Common.Repositories.Implementations.Abstractions
         /// <returns>
         /// A <see cref="Task<RedisValue[]>"/> returns a value representing whether the set operation was successful.
         /// </returns>
-        Task<RedisValue[]> GetHashValueListAsync(RedisKey key, RedisValue[] hashField, CommandFlags commandFlag = CommandFlags.None, int dbIndex = -1);
+        Task<RedisValue[]> GetHashValuesAsync(RedisKey key, RedisValue[] hashField, CommandFlags commandFlag = CommandFlags.None, int dbIndex = -1);
 
         /// <summary>
         ///     Used to remove one or more values in Redis Cache.
@@ -424,7 +424,7 @@ namespace RedisCache.Common.Repositories.Implementations.Abstractions
         ///     An <see cref="RedisKey"/> It represents the Key value in Redis Cache.
         /// </param>
         /// <param name="hashField">
-        ///     An <see cref="RedisValue[] "/> Represents the Key value below the Key in Redis Cache.
+        ///     An <see cref="string "/> Represents the Key value below the Key in Redis Cache.
         /// </param>
         ///  <param name="flags">
         ///     An <see cref="CommandFlags"/> Represents which Redis Cache connection the data will communicate with (defaults to None).
@@ -436,7 +436,7 @@ namespace RedisCache.Common.Repositories.Implementations.Abstractions
         /// A <see cref="RedisValue"/> returns a value representing whether the set operation was successful.
         /// </returns>
 
-        RedisValue GetHashValue(RedisKey key, RedisValue[] hashField, CommandFlags commandFlag = CommandFlags.None, int dbIndex = -1);
+        RedisValue GetHashValue(RedisKey key, string hashField, CommandFlags commandFlag = CommandFlags.None, int dbIndex = -1);
         /// <summary>
         ///     Used to asynchronously remove one or more values in Redis Cache.
         /// </summary>
@@ -444,7 +444,7 @@ namespace RedisCache.Common.Repositories.Implementations.Abstractions
         ///     An <see cref="RedisKey"/> It represents the Key value in Redis Cache.
         /// </param>
         /// <param name="hashField">
-        ///     An <see cref="RedisValue[] "/> Represents the Key value below the Key in Redis Cache.
+        ///     An <see cref="string "/> Represents the Key value below the Key in Redis Cache.
         /// </param>
         ///  <param name="flags">
         ///     An <see cref="CommandFlags"/> Represents which Redis Cache connection the data will communicate with (defaults to None).
@@ -455,7 +455,7 @@ namespace RedisCache.Common.Repositories.Implementations.Abstractions
         /// <returns>
         /// A <see cref="Task<RedisValue>"/> returns a value representing whether the set operation was successful.
         /// </returns>
-        Task<RedisValue> GetHashValueAsync(RedisKey key, RedisValue[] hashField, CommandFlags commandFlag = CommandFlags.None, int dbIndex = -1);
+        Task<RedisValue> GetHashValueAsync(RedisKey key, string hashField, CommandFlags commandFlag = CommandFlags.None, int dbIndex = -1);
 
 
     }

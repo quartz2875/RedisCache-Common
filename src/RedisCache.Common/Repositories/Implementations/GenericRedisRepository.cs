@@ -237,7 +237,7 @@ namespace RedisCache.Common.Repositories.Implementations
             }
         }
         /// <inheritdoc />
-        public RedisValue[] GetHashValueList(RedisKey key, RedisValue[] hashField, CommandFlags commandFlag = CommandFlags.None, int dbIndex = -1)
+        public RedisValue[] GetHashValues(RedisKey key, RedisValue[] hashField, CommandFlags commandFlag = CommandFlags.None, int dbIndex = -1)
         {
             var _db = _redis.GetDatabase(dbIndex);
             var result = _db.HashGet(key, hashField, commandFlag);
@@ -246,7 +246,7 @@ namespace RedisCache.Common.Repositories.Implementations
             return default!;
         }
         /// <inheritdoc />
-        public async Task<RedisValue[]> GetHashValueListAsync(RedisKey key, RedisValue[] hashField, CommandFlags commandFlag = CommandFlags.None, int dbIndex = -1)
+        public async Task<RedisValue[]> GetHashValuesAsync(RedisKey key, RedisValue[] hashField, CommandFlags commandFlag = CommandFlags.None, int dbIndex = -1)
         {
             var _db = _redis.GetDatabase(dbIndex);
             var result = await _db.HashGetAsync(key, hashField, commandFlag);
@@ -255,20 +255,20 @@ namespace RedisCache.Common.Repositories.Implementations
             return default!;
         }
         /// <inheritdoc />
-        public RedisValue GetHashValue(RedisKey key, RedisValue[] hashField, CommandFlags commandFlag = CommandFlags.None, int dbIndex = -1)
+        public RedisValue GetHashValue(RedisKey key, string hashField, CommandFlags commandFlag = CommandFlags.None, int dbIndex = -1)
         {
             var _db = _redis.GetDatabase(dbIndex);
-            var result = _db.HashGet(key, "Key:" + hashField, commandFlag);
-
+            var result = _db.HashGet(key, hashField, commandFlag);
             return result;
         }
         /// <inheritdoc />
-        public async Task<RedisValue> GetHashValueAsync(RedisKey key, RedisValue[] hashField, CommandFlags commandFlag = CommandFlags.None, int dbIndex = -1)
+        public async Task<RedisValue> GetHashValueAsync(RedisKey key, string hashField, CommandFlags commandFlag = CommandFlags.None, int dbIndex = -1)
         {
             var _db = _redis.GetDatabase(dbIndex);
-            var result = await _db.HashGetAsync(key, "Key:" + hashField, commandFlag);
+            var result = await _db.HashGetAsync(key, hashField, commandFlag);
 
             return result;
+
         }
     }
 
