@@ -5,7 +5,7 @@
     <Nullable>enable</Nullable>
 
     <PackageId>RedisCache.Common</PackageId>
-    <Version>1.0.5</Version>
+    <Version>1.0.7</Version>
     <Authors>Burak Quartz</Authors>
     <Company>BurakQuartz</Company>
 
